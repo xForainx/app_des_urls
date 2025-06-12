@@ -1,0 +1,21 @@
+version: "3"
+
+networks:
+  grafana:
+
+services:
+  app:
+    build: .
+    ports:
+      - 8081:80
+    volumes:
+      - ./logs_shared:/var/log       # app écrit ici
+    networks:
+      - grafana
+
+  db:
+    image: grafana/tns-db:latest
+    ports:
+      - 8082:80
+    networks:
+      - grafana
